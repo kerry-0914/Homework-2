@@ -6,7 +6,11 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ISwapV2Router02} from "../src/Arbitrage.sol";
 
 contract Token is ERC20 {
-    constructor(string memory name, string memory symbol, uint256 initialMint) ERC20(name, symbol) {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 initialMint
+    ) ERC20(name, symbol) {
         _mint(msg.sender, initialMint);
     }
 }
@@ -19,9 +23,15 @@ contract Arbitrage is Test {
     Token tokenE;
     address owner = makeAddr("owner");
     address arbitrager = makeAddr("arbitrageMan");
-    ISwapV2Router02 router = ISwapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+    ISwapV2Router02 router =
+        ISwapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
 
-    function _addLiquidity(address token0, address token1, uint256 token0Amount, uint256 token1Amount) internal {
+    function _addLiquidity(
+        address token0,
+        address token1,
+        uint256 token0Amount,
+        uint256 token1Amount
+    ) internal {
         router.addLiquidity(
             token0,
             token1,
@@ -76,12 +86,20 @@ contract Arbitrage is Test {
         uint256 tokensBefore = tokenB.balanceOf(arbitrager);
         console.log("Before Arbitrage tokenB Balance: %s", tokensBefore);
         tokenB.approve(address(router), 5 ether);
-        /**
-         * Please add your solution below
-         */
-        /**
-         * Please add your solution above
-         */
+        address[] memory path;
+        path = new address[](5);
+        path[0] = address(tokenB);
+        path[1] = address(tokenA);
+        path[2] = address(tokenD);
+        path[3] = address(tokenC);
+        path[4] = address(tokenB);
+        router.swapExactTokensForTokens(
+            5 ether,
+            20 ether,
+            path,
+            arbitrager,
+            block.timestamp
+        );
         uint256 tokensAfter = tokenB.balanceOf(arbitrager);
         assertGt(tokensAfter, 20 ether);
         console.log("After Arbitrage tokenB Balance: %s", tokensAfter);
