@@ -5,16 +5,16 @@ Please complete the report problem below:
 ## Problem 1
 Provide your profitable path, the amountIn, amountOut value for each swap, and your final reward (your tokenB balance).
 
-> tokenB-> tokenA(amountIn:5B,amountOut:5.6497A)
-> tokenA-> tokenD(amountIn:5.6497A,amountOut:2.4550D)
-> tokenD-> tokenC(amountIn:2.4550D,amountOut:5.0798C)
-> tokenC-> tokenB(amountIn:5.0798C,amountOut:20.0802B)
+> tokenB-> tokenA(amountIn:5B,amountOut:5.6497A)  
+> tokenA-> tokenD(amountIn:5.6497A,amountOut:2.4550D)  
+> tokenD-> tokenC(amountIn:2.4550D,amountOut:5.0798C)  
+> tokenC-> tokenB(amountIn:5.0798C,amountOut:20.0802B)  
 
 ## Problem 2
 What is slippage in AMM, and how does Uniswap V2 address this issue? Please illustrate with a function as an example.
 
->   slippage is the difference between the expected price and the actual price of a trade, Uniswap V2 address this by setting slippage tolerance.
->   slippage=(expected_amount-actual_amount)/expected_amount, which expected_amount=amount exchange by the rate of two token in the pool. Once slippage is higher than slippage tolerance the transaction wil revert.
+>  Slippage is the difference between the expected price and the actual price of a trade, Uniswap V2 address this by setting slippage tolerance.
+>  Slippage=(expected_amount-actual_amount)/expected_amount, which expected_amount=amount exchange by the rate of two token in the pool. Once slippage is higher than slippage tolerance the transaction wil revert.
 
 ## Problem 3
 Please examine the mint function in the UniswapV2Pair contract. Upon initial liquidity minting, a minimum liquidity is subtracted. What is the rationale behind this design?
